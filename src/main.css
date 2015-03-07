@@ -16,6 +16,15 @@ h1, h2, h3, h4, h5, h6, form {
   z-index: 333;
   background-color: rgba(240, 240, 240, 0.75);
 }
+#overlay md-progress-circular {
+  height: 50px;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: absolute;
+  top: 50%;
+  width: 50px;
+}
 
 #logo {
   display: inline-block;
