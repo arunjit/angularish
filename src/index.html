@@ -18,7 +18,7 @@
       <md-progress-circular class="md-primary" md-mode="indeterminate" flex></md-progress-circular>
     </div>
 
-    <core-header-panel id="main" mode="waterfall" fit ui-view>
+    <core-header-panel id="main" mode="waterfall" fit>
       <core-toolbar id="appbar" ng-class="{searching: G.searching}">
         <header layout horizontal center>
           <paper-icon-button id="menu-toggle" icon="menu" hidden></paper-icon-button>
@@ -27,7 +27,7 @@
         </header>
         <a-search-box layout horizontal center flex></a-search-box>
       </core-toolbar>
-      <core-drawer-panel id="drawer">
+      <core-drawer-panel id="drawer" ui-view>
         <section drawer id="sidebar" layout vertical>
           <nav>
             <label ui-sref-active="active"><a ui-sref="app.home">Home</a></label>

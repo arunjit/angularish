@@ -61,21 +61,21 @@ run(function($rootScope, $state, Events) {
 // Toggler drawer.
 angular.module('angularish').
 run(function($document) {
-  var toggle = $document[0].getElementById('menu-toggle');
-  var drawer = $document[0].getElementById('drawer');
-  var hide = function(el) {el.setAttribute('hidden', true)};
-  var show = function(el) {el.removeAttribute('hidden')};
-  if (toggle && drawer) {
-    toggle.addEventListener('click', function() {
-      drawer.togglePanel();
-    });
-    drawer.addEventListener('core-responsive-change', function(event) {
-      (event.detail.narrow ? show : hide)(toggle);
-    });
-    if (drawer.hasAttribute('narrow')) {
-      show(toggle);
-    }
+  var hide = function(el) {el && el.setAttribute('hidden', true)};
+  var show = function(el) {el && el.removeAttribute('hidden')};
+  var $ = function(id) {return $document[0].getElementById(id)};
+  var checkAndHide = function() {
+    ($('drawer').hasAttribute('narrow') ? show : hide)($('menu-toggle'));
   }
+  // NOTE: the #menu-toggle MUST be outside any ui-views.
+  $('menu-toggle').addEventListener('click', function() {
+    $('drawer').togglePanel();
+  }, false);
+  // core-responsive-change is bubbled up from the active drawer panel.
+  $('main').addEventListener('core-responsive-change', function(event) {
+    checkAndHide();
+  }, false);
+  checkAndHide();
 });
 
 
