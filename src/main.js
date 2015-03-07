@@ -29,8 +29,8 @@ config(function($stateProvider, $locationProvider, $urlRouterProvider) {
 angular.module('angularish').
 config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default').
-      primaryPalette('blue').
-      accentPalette('red');
+      primaryPalette('deep-orange', {'default': '700'}).
+      accentPalette('green', {'default': '700'});
 });
 
 
