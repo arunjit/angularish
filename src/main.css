@@ -12,6 +12,11 @@ h1, h2, h3, h4, h5, h6, form {
   padding: 0;
 }
 
+#overlay {
+  z-index: 333;
+  background-color: rgba(240, 240, 240, 0.75);
+}
+
 #logo {
   display: inline-block;
   width: 40px;
@@ -82,6 +87,9 @@ input.globalsearch {
   line-height: 1.5;
   height: 40px;
   padding: 0 8px;
+}
+input.globalsearch:hover {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 input.globalsearch::-webkit-input-placeholder {

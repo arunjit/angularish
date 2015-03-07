@@ -1,7 +1,7 @@
 (function() {
 'use-strict';
 
-angular.module('angularish/context', []);
+angular.module('angularish/context', ['angularish/constants']);
 
 
 var Context = function(context) {
@@ -18,7 +18,7 @@ Context.prototype.hasRole = function(role) {
 
 
 angular.module('angularish/context').
-service('contextService', function($log, $q, $timeout) {
+service('contextService', function($log, $q, $timeout, $rootScope, Events) {
 
   var contextPromise = null;
 
@@ -33,8 +33,9 @@ service('contextService', function($log, $q, $timeout) {
     // simulate HTTP
     $timeout(function() {
       defer.resolve(new Context({user: 'arunjit', roles: ['admin']}));
+      $rootScope.$emit(Events.FETCHED_CONTEXT);
       $log.debug('Fetched new context');
-    }, 1000);
+    }, 2000);
 
     contextPromise = defer.promise;
     return contextPromise;

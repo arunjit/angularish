@@ -11,6 +11,7 @@ angular.module('angularish', [
 ]);
 
 
+// Routing and states
 angular.module('angularish').
 config(function($stateProvider, $locationProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(false);
@@ -18,25 +19,49 @@ config(function($stateProvider, $locationProvider, $urlRouterProvider) {
       state('app', States.BASE).
       state('app.home', States.HOME).
       state('app.1', States.V1).
-      state('app.2', States.V2);
+      state('app.2', States.V2).
+      state('app.search', States.SEARCH);
   $urlRouterProvider.otherwise('/home');
+});
+
+
+// Theming
+angular.module('angularish').
+config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default').
+      primaryPalette('blue').
+      accentPalette('red');
 });
 
 
 // $rootScope and handle events
 angular.module('angularish').
-run(function($rootScope, Events) {
+run(function($rootScope, $state, Events) {
   /** @struct Global vars. */
-  $rootScope.G = {
-    searching: false
+  var G = $rootScope.G = {
+    searching: false,
+    haveContext: false,
+    lastState: null
   };
 
   $rootScope.$on(Events.GS_INIT, function() {
-    $rootScope.G.searching = true;
+    G.searching = true;
   });
 
   $rootScope.$on(Events.GS_CANCEL, function() {
-    $rootScope.G.searching = false;
+    G.searching = false;
+    if (G.lastState) {
+      $state.go(G.lastState.name, G.lastState.params);
+    }
+  });
+
+  $rootScope.$on(Events.FETCHED_CONTEXT, function() {
+    G.haveContext = true;
+  });
+
+  $rootScope.$on('$stateChangeSuccess', function(ev, to, toP, from, fromP) {
+    if (!from.name || from.name == 'app.search') return;
+    G.lastState = {name: from.name, params: fromP};
   });
 });
 
@@ -101,6 +126,14 @@ var States = {
       },
       sidebar: {
         template: '<label>View 2</label>'
+      }
+    }
+  },
+  SEARCH: {
+    url: 'search?q',
+    views: {
+      main: {
+        template: 'Search'
       }
     }
   }
