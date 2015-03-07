@@ -16,30 +16,25 @@ directive('aSearchBox', function() {
 });
 
 angular.module('angularish/searchbox').
-controller('SearchBoxCtrl', function($rootScope, Events, $state) {
+controller('SearchBoxCtrl', function(Events, $rootScope, $state, $window) {
 
   this.query = '';
 
   this.search = function(query) {
-    $state.go('app.search', {q: query});
+    if (query) $state.go('app.search', {q: query});
   };
 
   this.focus = function() {
     $rootScope.$emit(Events.GS_INIT);
   };
 
-  this.blur = function() {
-    if (!this.query) cancelSearch();
-  };
-
   this.clear = function() {
     this.query = '';
-    cancelSearch();
-  }
-
-  var cancelSearch = function() {
     $rootScope.$emit(Events.GS_CANCEL);
-  };
+    if ($state.current.name == 'app.search') {
+      $window.history.back();
+    }
+  }
 
   if ($state.params.q) {
     this.focus();
