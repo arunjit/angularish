@@ -1,0 +1,7 @@
+<form ng-submit="searchBox.search(searchBox.query)" layout horizontal flex>
+  <input type="text" placeholder="Search" class="globalsearch" flex
+         ng-focus="searchBox.focus()" ng-blur="searchBox.blur()"
+         ng-model="searchBox.query">
+  <paper-icon-button icon="clear" ng-click="searchBox.clear()" ng-show="$root.G.searching">
+  </paper-icon-button>
+</form>
