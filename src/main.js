@@ -40,8 +40,7 @@ run(function($rootScope, $state, Events) {
   /** @struct Global vars. */
   var G = $rootScope.G = {
     searching: false,
-    haveContext: false,
-    lastState: null
+    haveContext: false
   };
 
   $rootScope.$on(Events.GS_INIT, function() {
@@ -50,19 +49,12 @@ run(function($rootScope, $state, Events) {
 
   $rootScope.$on(Events.GS_CANCEL, function() {
     G.searching = false;
-    if (G.lastState) {
-      $state.go(G.lastState.name, G.lastState.params);
-    }
   });
 
   $rootScope.$on(Events.FETCHED_CONTEXT, function() {
     G.haveContext = true;
   });
 
-  $rootScope.$on('$stateChangeSuccess', function(ev, to, toP, from, fromP) {
-    if (!from.name || from.name == 'app.search') return;
-    G.lastState = {name: from.name, params: fromP};
-  });
 });
 
 
