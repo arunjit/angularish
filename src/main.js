@@ -125,7 +125,7 @@ var States = {
     url: 'search?q',
     views: {
       main: {
-        template: 'Search'
+        templateUrl: 'search/search.html'
       }
     }
   }
