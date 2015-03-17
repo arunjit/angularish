@@ -7,7 +7,8 @@ angular.module('angularish', [
   'angularish/constants',
   'angularish/context',
   'angularish/home',
-  'angularish/searchbox'
+  'angularish/searchbox',
+  'angularish/sidebar'
 ]);
 
 
@@ -79,6 +80,16 @@ run(function($document) {
 });
 
 
+function withDefaultSidebar(viewConfig) {
+  viewConfig['sidebar-default'] = {
+    controller: 'SidebarNavCtrl',
+    controllerAs: 'nav',
+    templateUrl: 'sidebar/sidebar.html'
+  };
+  return viewConfig;
+}
+
+
 var States = {
   BASE: {
     url: '/',
@@ -91,35 +102,35 @@ var States = {
   },
   HOME: {
     url: 'home',
-    views: {
+    views: withDefaultSidebar({
       main: {
         controller: 'HomeCtrl',
         controllerAs: 'home',
         templateUrl: 'home/home.html'
       }
-    }
+    })
   },
   V1: {
     url: '1',
-    views: {
+    views: withDefaultSidebar({
       main: {
         template: 'Placeholder for view 1'
       },
       sidebar: {
         template: '<label>View 1</label>'
       }
-    }
+    })
   },
   V2: {
     url: '2',
-    views: {
+    views: withDefaultSidebar({
       main: {
         template: 'Placeholder for view 2'
       },
       sidebar: {
         template: '<label>View 2</label>'
       }
-    }
+    })
   },
   SEARCH: {
     url: 'search?q',

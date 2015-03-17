@@ -16,6 +16,10 @@ Context.prototype.hasRole = function(role) {
   return this.context_.roles.indexOf(role) >= 0;
 };
 
+Context.prototype.hasMinimumVersion = function(version) {
+  return this.context_.version >= version;
+};
+
 
 angular.module('angularish/context').
 service('contextService', function($log, $q, $timeout, $rootScope, Events) {
@@ -32,7 +36,13 @@ service('contextService', function($log, $q, $timeout, $rootScope, Events) {
 
     // simulate HTTP
     $timeout(function() {
-      defer.resolve(new Context({user: 'arunjit', roles: ['admin']}));
+      defer.resolve(
+        new Context({
+          user: 'arunjit',
+          roles: ['admin'],
+          version: ~~(Math.random() * 2) + 1
+        })
+      );
       $rootScope.$emit(Events.FETCHED_CONTEXT);
       $log.debug('Fetched new context');
     }, 2000);

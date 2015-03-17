@@ -29,17 +29,16 @@
       </core-toolbar>
       <core-drawer-panel id="drawer" ui-view>
         <section drawer id="sidebar" layout vertical>
-          <nav>
-            <label ui-sref-active="active"><a ui-sref="app.home">Home</a></label>
-            <label>Pages</label>
-            <ul>
-              <li ui-sref-active="active"><a ui-sref="app.1">V1</a></li>
-              <li ui-sref-active="active"><a ui-sref="app.2">V2</a></li>
-            <ul>
-          </nav>
+          <nav ui-view="sidebar-default"></nav>
           <section ui-view="sidebar"></section>
           <div flex></div>
-          <label>Help</label>
+          <nav>
+            <label>Help</label>
+            <ul>
+              <li><a href="/usermanual">User manual</a></li>
+              <li><a href="/faq">FAQ</a></li>
+            <ul>
+          </nav>
         </section>
         <section main ui-view="main"></section>
       </core-drawer-panel>
@@ -55,6 +54,7 @@
     <script src="context/context.js"></script>
     <script src="home/home.js"></script>
     <script src="search/searchbox.js"></script>
+    <script src="sidebar/sidebar.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
