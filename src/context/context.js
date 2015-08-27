@@ -45,7 +45,7 @@ service('contextService', function($log, $q, $timeout, $rootScope, Events) {
       );
       $rootScope.$emit(Events.FETCHED_CONTEXT);
       $log.debug('Fetched new context');
-    }, 2000);
+    }, 1000);
 
     contextPromise = defer.promise;
     return contextPromise;

@@ -19,6 +19,11 @@ h1, h2, h3, h4, h5, h6, form {
   padding: 0;
 }
 
+/* Fix a.md-button */
+a.md-button {
+  display: inline-flex !important;
+}
+
 #overlay {
   z-index: 333;
   background-color: rgba(240, 240, 240, 0.75);
@@ -67,11 +72,22 @@ h1, h2, h3, h4, h5, h6, form {
   color: #F5F5F5;
 }
 
-#sidebar {
+#header-color {
+  position: absolute;
+  width: 100%;
+  height: 256px;
+  background-color: #673AB7;
+}
+
+#content {
+  max-width: 936px;
+  margin: 0 auto;
+}
+
+/*#sidebar {
   background-color: #F5F5F5;
   padding: 8px;
 }
-
 #sidebar label {
   color: #999;
   font-size: 0.8em;
@@ -95,7 +111,7 @@ h1, h2, h3, h4, h5, h6, form {
   border-color: #E64A19;
   color: #E64A19;
   font-weight: bold;
-}
+}*/
 
 .fnbar {
   background-color: #424242;

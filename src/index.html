@@ -15,16 +15,20 @@
       <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
     </div>
 
-    <section id="main" ng-if="G.haveContext" layout="column" flex>
+    <section id="main" ng-if="G.haveContext" layout="column" flex ng-cloak>
       <md-toolbar id="appbar" layout="row" layout-align="start center" ng-class="{searching: G.searching}">
-        <header layout="row" layout-align="start center" ui-view="appbar">
+        <header layout="row" layout-align="start center">
           <h2 id="logo">A</h2>
           <h2>Angularish</h2>
         </header>
-        <a-search-box layout="row" layout-align="start center" flex></a-search-box>
+        <a-spacer></a-spacer>
+        <md-button class="md-icon-button" ui-sref="app.search">
+          <md-icon md-font-library="material-icons">search</md-icon>
+        </md-button>
       </md-toolbar>
-      <md-content ui-view="main" flex>
-        <span>replace me!</span>
+      <md-content flex layout="column">
+        <div id="header-color"></div>
+        <section ui-view="main" id="content" flex></section>
       </md-content>
     </section>
 
@@ -34,6 +38,7 @@
     <script src="packages/angular-material/angular-material.js"></script>
     <script src="packages/angular-messages/angular-messages.js"></script>
     <script src="packages/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="common/spacer.js"></script>
     <script src="constants.js"></script>
     <script src="context/context.js"></script>
     <script src="home/home.js"></script>

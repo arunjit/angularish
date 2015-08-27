@@ -32,10 +32,11 @@ controller('SearchBoxCtrl', function(Events, $rootScope, $state, $window) {
   this.clear = function() {
     this.query = '';
     $rootScope.$emit(Events.GS_CANCEL);
-    if ($state.current.name == 'app.search') {
+    if ($state.current.name == 'app.search' ||
+        $state.current.name == 'app.searchresults') {
       $window.history.back();
     }
-  }
+  };
 
   if ($state.params.q) {
     this.focus();

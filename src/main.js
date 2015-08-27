@@ -4,6 +4,7 @@
 angular.module('angularish', [
   'ngMaterial',
   'ui.router',
+  'angularish/common/spacer',
   'angularish/constants',
   'angularish/context',
   'angularish/home',
@@ -17,11 +18,12 @@ angular.module('angularish')
 .config(function($stateProvider, $locationProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(false);
   $stateProvider
-      .state('app', States.BASE)
-      .state('app.home', States.HOME)
-      .state('app.1', States.V1)
-      .state('app.2', States.V2)
-      .state('app.search', States.SEARCH);
+      .state(States.BASE)
+      .state(States.HOME)
+      .state(States.V1)
+      .state(States.V2)
+      .state(States.SEARCH)
+      .state(States.SEARCHRESULTS);
   $urlRouterProvider.otherwise('/home');
 });
 
@@ -71,6 +73,7 @@ function withDefaultSidebar(viewConfig) {
 
 var States = {
   BASE: {
+    name: 'app',
     url: '/',
     abstract: true,
     resolve: {
@@ -80,6 +83,7 @@ var States = {
     }
   },
   HOME: {
+    name: 'app.home',
     url: 'home',
     views: withDefaultSidebar({
       main: {
@@ -90,6 +94,7 @@ var States = {
     })
   },
   V1: {
+    name: 'app.1',
     url: '1',
     views: withDefaultSidebar({
       main: {
@@ -101,6 +106,7 @@ var States = {
     })
   },
   V2: {
+    name: 'app.2',
     url: '2',
     views: withDefaultSidebar({
       main: {
@@ -112,17 +118,26 @@ var States = {
     })
   },
   SEARCH: {
+    name: 'app.search',
+    url: 'search',
+    views: {
+      main: {
+        controller: function(context) {},
+        templateUrl: 'search/search.html'
+      }
+    }
+  },
+  SEARCHRESULTS: {
+    name: 'app.searchresults',
     url: 'search?q',
     views: {
       main: {
-        templateUrl: 'search/search.html'
-      },
-      appbar: {
-        templateUrl: 'search/back.html'
+        templateUrl: 'search/searchresults.html'
       }
     }
   },
   INFO: {
+    name: 'app.info',
     url: 'info',
     abstract: true,
     views: {
@@ -132,6 +147,7 @@ var States = {
     }
   },
   INFO_TAB1: {
+    name: 'app.info.1',
     url: 'info/1',
     views: {
       tab: {
