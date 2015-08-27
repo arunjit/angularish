@@ -11,6 +11,7 @@ directive('aSearchBox', function() {
     templateUrl: 'search/searchbox.html',
     controller: 'SearchBoxCtrl',
     controllerAs: 'searchBox',
+    replace: true,
     link: function(scope, element, attrs) {}
   };
 });

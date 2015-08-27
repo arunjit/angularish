@@ -13,31 +13,31 @@ angular.module('angularish', [
 
 
 // Routing and states
-angular.module('angularish').
-config(function($stateProvider, $locationProvider, $urlRouterProvider) {
+angular.module('angularish')
+.config(function($stateProvider, $locationProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(false);
-  $stateProvider.
-      state('app', States.BASE).
-      state('app.home', States.HOME).
-      state('app.1', States.V1).
-      state('app.2', States.V2).
-      state('app.search', States.SEARCH);
+  $stateProvider
+      .state('app', States.BASE)
+      .state('app.home', States.HOME)
+      .state('app.1', States.V1)
+      .state('app.2', States.V2)
+      .state('app.search', States.SEARCH);
   $urlRouterProvider.otherwise('/home');
 });
 
 
 // Theming
-angular.module('angularish').
-config(function($mdThemingProvider) {
-  $mdThemingProvider.theme('default').
-      primaryPalette('deep-orange', {'default': '700'}).
-      accentPalette('green', {'default': '700'});
+angular.module('angularish')
+.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+  .    primaryPalette('deep-purple', {'default': '500'})
+  .accentPalette('cyan', {'default': '500'});
 });
 
 
 // $rootScope and handle events
-angular.module('angularish').
-run(function($rootScope, $state, Events) {
+angular.module('angularish')
+.run(function($rootScope, $state, Events) {
   /** @struct Global vars. */
   var G = $rootScope.G = {
     searching: false,
@@ -59,33 +59,12 @@ run(function($rootScope, $state, Events) {
 });
 
 
-// Toggler drawer.
-angular.module('angularish').
-run(function($document) {
-  var hide = function(el) {el && el.setAttribute('hidden', true)};
-  var show = function(el) {el && el.removeAttribute('hidden')};
-  var $ = function(id) {return $document[0].getElementById(id)};
-  var checkAndHide = function() {
-    ($('drawer').hasAttribute('narrow') ? show : hide)($('menu-toggle'));
-  }
-  // NOTE: the #menu-toggle MUST be outside any ui-views.
-  $('menu-toggle').addEventListener('click', function() {
-    $('drawer').togglePanel();
-  }, false);
-  // core-responsive-change is bubbled up from the active drawer panel.
-  $('main').addEventListener('core-responsive-change', function(event) {
-    checkAndHide();
-  }, false);
-  checkAndHide();
-});
-
-
 function withDefaultSidebar(viewConfig) {
-  viewConfig['sidebar-default'] = {
-    controller: 'SidebarNavCtrl',
-    controllerAs: 'nav',
-    templateUrl: 'sidebar/sidebar.html'
-  };
+  // viewConfig['sidebar-default'] = {
+  //   controller: 'SidebarNavCtrl',
+  //   controllerAs: 'nav',
+  //   templateUrl: 'sidebar/sidebar.html'
+  // };
   return viewConfig;
 }
 
@@ -137,6 +116,9 @@ var States = {
     views: {
       main: {
         templateUrl: 'search/search.html'
+      },
+      appbar: {
+        templateUrl: 'search/back.html'
       }
     }
   },

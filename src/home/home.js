@@ -2,7 +2,8 @@
 'use-strict';
 
 angular.module('angularish/home', ['angularish/context']).
-controller('HomeCtrl', function(context) {
+controller('HomeCtrl', function(context, $log) {
+  $log.info('HomeCtrl');
   this.user = context.getUser();
 
   this.isAdmin = function() {

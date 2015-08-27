@@ -4,45 +4,29 @@
     <meta name="viewport"
           content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>Angularish</title>
-    <link rel="import" href="packages/core-drawer-panel/core-drawer-panel.html">
-    <link rel="import" href="packages/core-header-panel/core-header-panel.html">
-    <link rel="import" href="packages/core-toolbar/core-toolbar.html">
-    <link rel="import" href="packages/font-roboto/roboto.html">
-    <link rel="import" href="packages/paper-icon-button/paper-icon-button.html">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="packages/angular-material/angular-material.css">
     <link rel="stylesheet" href="main.css">
   </head>
-  <body fullbleed unresolved>
+  <body layout="column">
 
-    <div id="overlay" ng-hide="G.haveContext" fit layout vertical center>
+    <div id="overlay" ng-if="!G.haveContext" layout="column" layout-align="center center" flex>
       <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
     </div>
 
-    <core-header-panel id="main" fit>
-      <core-toolbar id="appbar" ng-class="{searching: G.searching}">
-        <header layout horizontal center>
-          <paper-icon-button id="menu-toggle" icon="menu" hidden></paper-icon-button>
+    <section id="main" ng-if="G.haveContext" layout="column" flex>
+      <md-toolbar id="appbar" layout="row" layout-align="start center" ng-class="{searching: G.searching}">
+        <header layout="row" layout-align="start center" ui-view="appbar">
           <h2 id="logo">A</h2>
           <h2>Angularish</h2>
         </header>
-        <a-search-box layout horizontal center flex></a-search-box>
-      </core-toolbar>
-      <core-drawer-panel id="drawer" ui-view>
-        <section drawer id="sidebar" layout vertical>
-          <nav ui-view="sidebar-default"></nav>
-          <section ui-view="sidebar"></section>
-          <div flex></div>
-          <nav>
-            <label>Help</label>
-            <ul>
-              <li><a href="/usermanual">User manual</a></li>
-              <li><a href="/faq">FAQ</a></li>
-            <ul>
-          </nav>
-        </section>
-        <section main ui-view="main"></section>
-      </core-drawer-panel>
-    </core-header-panel>
+        <a-search-box layout="row" layout-align="start center" flex></a-search-box>
+      </md-toolbar>
+      <md-content ui-view="main" flex>
+        <span>replace me!</span>
+      </md-content>
+    </section>
 
     <script src="packages/angular/angular.js"></script>
     <script src="packages/angular-animate/angular-animate.js"></script>

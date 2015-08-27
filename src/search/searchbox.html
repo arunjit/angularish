@@ -1,8 +1,12 @@
-<form ng-submit="searchBox.search(searchBox.query)" layout horizontal flex>
+<form ng-submit="searchBox.search(searchBox.query)" layout="row" layout-align="start center">
   <input type="text" placeholder="Search" class="globalsearch" flex
          ng-focus="searchBox.focus()" ng-model="searchBox.query">
-  <paper-icon-button icon="search" ng-click="searchBox.search(searchBox.query)"
-      ng-show="$root.G.searching"></paper-icon-button>
-  <paper-icon-button icon="clear" ng-click="searchBox.clear()"
-      ng-show="$root.G.searching"></paper-icon-button>
+  <md-button class="md-icon-button" ng-click="searchBox.search(searchBox.query)"
+      ng-if="$root.G.searching">
+    <md-icon md-font-library="material-icons">search</md-icon>
+  </md-button>
+  <md-button class="md-icon-button" ng-click="searchBox.clear()"
+      ng-if="$root.G.searching">
+    <md-icon md-font-library="material-icons">clear</md-icon>
+  </md-button>
 </form>
