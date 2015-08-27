@@ -139,6 +139,23 @@ var States = {
         templateUrl: 'search/search.html'
       }
     }
+  },
+  INFO: {
+    url: 'info',
+    abstract: true,
+    views: {
+      main: {
+        templateUrl: 'info/info.html'
+      }
+    }
+  },
+  INFO_TAB1: {
+    url: 'info/1',
+    views: {
+      tab: {
+        template: '<label>Tab 1</label>'
+      }
+    }
   }
 };
 
