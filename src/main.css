@@ -24,9 +24,15 @@ h1, h2, h3, h4, h5, h6, form {
 a.md-button {
   display: inline-flex !important;
 }
+/* Fix a[md-ink-ripple] */
+a[md-ink-ripple] {
+  position: relative;
+}
+
 /* no bgcolor on md-content */
 md-content {
   background: none !important;
+  background-color: transparent !important;
 }
 
 #overlay {
@@ -159,4 +165,35 @@ input.globalsearch ~ .md-icon-button > md-icon {
 input.globalsearch::-webkit-input-placeholder {
    color: inherit;
    font-family: inherit;
+}
+
+/* Navigation */
+.go-back {
+  position: relative;
+  height: 48px;
+  padding-right: 8px;
+}
+
+/* Misc. */
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+::-webkit-scrollbar-button {
+  height: 0px;
+  width: 0px;
+}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  display: block;
+}
+
+::-webkit-scrollbar-button:vertical:start:increment,
+::-webkit-scrollbar-button:vertical:end:decrement {
+  display: none;
+}
+::-webkit-scrollbar-track:vertical {
+  background-color: rgba(0, 0, 0, .16);
+  border-right: 1px solid white;
+  border-left: 1px solid white;
 }

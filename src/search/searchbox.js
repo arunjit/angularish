@@ -3,8 +3,8 @@
 
 angular.module('angularish/searchbox', ['angularish/constants']);
 
-angular.module('angularish/searchbox').
-directive('aSearchBox', function() {
+angular.module('angularish/searchbox')
+.directive('aSearchBox', function() {
   return {
     restrict: 'E',
     scope: {},
@@ -16,13 +16,13 @@ directive('aSearchBox', function() {
   };
 });
 
-angular.module('angularish/searchbox').
-controller('SearchBoxCtrl', function(Events, $rootScope, $state, $window) {
+angular.module('angularish/searchbox')
+.controller('SearchBoxCtrl', function(Events, $rootScope, $state, $window) {
 
   this.query = '';
 
   this.search = function(query) {
-    if (query) $state.go('app.search', {q: query});
+    if (query) $state.go('app.searchresults', {q: query});
   };
 
   this.focus = function() {
@@ -32,10 +32,6 @@ controller('SearchBoxCtrl', function(Events, $rootScope, $state, $window) {
   this.clear = function() {
     this.query = '';
     $rootScope.$emit(Events.GS_CANCEL);
-    if ($state.current.name == 'app.search' ||
-        $state.current.name == 'app.searchresults') {
-      $window.history.back();
-    }
   };
 
   if ($state.params.q) {

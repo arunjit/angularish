@@ -7,6 +7,7 @@ angular.module('angularish', [
   'angularish/common/spacer',
   'angularish/constants',
   'angularish/context',
+  'angularish/nav',
   'angularish/nav/back',
   'angularish/home',
   'angularish/searchbox',
@@ -38,21 +39,11 @@ angular.module('angularish')
 
 // $rootScope and handle events
 angular.module('angularish')
-.run(function($rootScope, $state, Events) {
+.run(function($rootScope, Events, navigation) {
   /** @struct Global vars. */
   var G = $rootScope.G = {
-    searching: false,
-    haveContext: false,
-    lastState: ''
+    haveContext: false
   };
-
-  $rootScope.$on(Events.GS_INIT, function() {
-    G.searching = true;
-  });
-
-  $rootScope.$on(Events.GS_CANCEL, function() {
-    G.searching = false;
-  });
 
   $rootScope.$on(Events.FETCHED_CONTEXT, function() {
     G.haveContext = true;
@@ -60,20 +51,10 @@ angular.module('angularish')
 
   $rootScope.$on('$stateChangeSuccess',
       function(e, to, toParams, from, fromParams) {
-        G.lastState = from.name;
+        navigation.setLastState(from.name);
       });
 
 });
-
-
-function withDefaultSidebar(viewConfig) {
-  // viewConfig['sidebar-default'] = {
-  //   controller: 'SidebarNavCtrl',
-  //   controllerAs: 'nav',
-  //   templateUrl: 'sidebar/sidebar.html'
-  // };
-  return viewConfig;
-}
 
 
 var States = {
@@ -90,13 +71,13 @@ var States = {
   HOME: {
     name: 'app.home',
     url: 'home',
-    views: withDefaultSidebar({
+    views: {
       'main@': {
         controller: 'HomeCtrl',
         controllerAs: 'home',
         templateUrl: 'home/home.html'
       }
-    })
+    }
   },
   SEARCH: {
     name: 'app.search',
@@ -106,15 +87,13 @@ var States = {
         templateUrl: 'search/search.html'
       },
       'appbar-left@': {
-        controller: 'BackCtrl',
-        controllerAs: 'back',
-        templateUrl: 'nav/back.html'
+        template: '<go-back></go-back>'
       }
     }
   },
   SEARCHRESULTS: {
     name: 'app.searchresults',
-    url: 'search?q',
+    url: 'results?q',
     views: {
       'main@': {
         templateUrl: 'search/searchresults.html'

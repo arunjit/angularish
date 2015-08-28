@@ -1,23 +1,29 @@
 (function() {
 'use strict';
 
-var StateMap = {
-  'app.home': 'Home'
-}
+var DEFAULT_STATE = 'app.home';
 
-angular.module('angularish/nav/back', ['ngMaterial'])
-.controller('BackCtrl', function($log, $rootScope, $state) {
-
-  /** @export {string} */
-  this.lastState = $rootScope.G.lastState || 'app.home';
-
-  /** @export {string} */
-  this.lastPage = StateMap[this.lastState];
-
-  /** @export */
-  this.goBack = function() {
-    $state.go(this.lastState);
+angular.module('angularish/nav/back', ['ngMaterial', 'angularish/nav']);
+angular.module('angularish/nav/back')
+.directive('goBack', function() {
+  return {
+    bindToController: true,
+    controller: 'BackCtrl',
+    controllerAs: 'ctrl',
+    replace: true,
+    restrict: 'E',
+    scope: {},
+    templateUrl: 'nav/back.html',
   };
+})
+.controller('BackCtrl', function(navigation, StateNames) {
+
+  /** @export {string} */
+  this.lastState = navigation.getLastState() || DEFAULT_STATE;
+
+  /** @export {string} */
+  this.lastPage = StateNames[this.lastState];
+
 });
 
 })();
