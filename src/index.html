@@ -16,8 +16,8 @@
     </div>
 
     <section id="main" ng-if="G.haveContext" layout="column" flex ng-cloak>
-      <md-toolbar id="appbar" layout="row" layout-align="start center" ng-class="{searching: G.searching}">
-        <header layout="row" layout-align="start center">
+      <md-toolbar id="appbar" layout="row" layout-align="start center">
+        <header layout="row" layout-align="start center" ui-view="appbar-left">
           <h2 id="logo">A</h2>
           <h2>Angularish</h2>
         </header>
@@ -49,6 +49,7 @@
     <script src="constants.js"></script>
     <script src="context/context.js"></script>
     <script src="home/home.js"></script>
+    <script src="nav/back.js"></script>
     <script src="search/searchbox.js"></script>
     <script src="sidebar/sidebar.js"></script>
     <script src="main.js"></script>

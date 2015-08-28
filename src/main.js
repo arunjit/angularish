@@ -7,6 +7,7 @@ angular.module('angularish', [
   'angularish/common/spacer',
   'angularish/constants',
   'angularish/context',
+  'angularish/nav/back',
   'angularish/home',
   'angularish/searchbox',
   'angularish/sidebar'
@@ -41,7 +42,8 @@ angular.module('angularish')
   /** @struct Global vars. */
   var G = $rootScope.G = {
     searching: false,
-    haveContext: false
+    haveContext: false,
+    lastState: ''
   };
 
   $rootScope.$on(Events.GS_INIT, function() {
@@ -55,6 +57,11 @@ angular.module('angularish')
   $rootScope.$on(Events.FETCHED_CONTEXT, function() {
     G.haveContext = true;
   });
+
+  $rootScope.$on('$stateChangeSuccess',
+      function(e, to, toParams, from, fromParams) {
+        G.lastState = from.name;
+      });
 
 });
 
@@ -96,8 +103,12 @@ var States = {
     url: 'search',
     views: {
       'main@': {
-        controller: function(context) {},
         templateUrl: 'search/search.html'
+      },
+      'appbar-left@': {
+        controller: 'BackCtrl',
+        controllerAs: 'back',
+        templateUrl: 'nav/back.html'
       }
     }
   },
