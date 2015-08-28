@@ -20,8 +20,6 @@ angular.module('angularish')
   $stateProvider
       .state(States.BASE)
       .state(States.HOME)
-      .state(States.V1)
-      .state(States.V2)
       .state(States.SEARCH)
       .state(States.SEARCHRESULTS);
   $urlRouterProvider.otherwise('/home');
@@ -32,8 +30,8 @@ angular.module('angularish')
 angular.module('angularish')
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
-  .    primaryPalette('deep-purple', {'default': '500'})
-  .accentPalette('cyan', {'default': '500'});
+      .primaryPalette('deep-purple')
+      .accentPalette('cyan');
 });
 
 
@@ -86,34 +84,10 @@ var States = {
     name: 'app.home',
     url: 'home',
     views: withDefaultSidebar({
-      main: {
+      'main@': {
         controller: 'HomeCtrl',
         controllerAs: 'home',
         templateUrl: 'home/home.html'
-      }
-    })
-  },
-  V1: {
-    name: 'app.1',
-    url: '1',
-    views: withDefaultSidebar({
-      main: {
-        template: 'Placeholder for view 1'
-      },
-      sidebar: {
-        template: '<label>View 1</label>'
-      }
-    })
-  },
-  V2: {
-    name: 'app.2',
-    url: '2',
-    views: withDefaultSidebar({
-      main: {
-        template: 'Placeholder for view 2'
-      },
-      sidebar: {
-        template: '<label>View 2</label>'
       }
     })
   },
@@ -121,7 +95,7 @@ var States = {
     name: 'app.search',
     url: 'search',
     views: {
-      main: {
+      'main@': {
         controller: function(context) {},
         templateUrl: 'search/search.html'
       }
@@ -131,27 +105,8 @@ var States = {
     name: 'app.searchresults',
     url: 'search?q',
     views: {
-      main: {
+      'main@': {
         templateUrl: 'search/searchresults.html'
-      }
-    }
-  },
-  INFO: {
-    name: 'app.info',
-    url: 'info',
-    abstract: true,
-    views: {
-      main: {
-        templateUrl: 'info/info.html'
-      }
-    }
-  },
-  INFO_TAB1: {
-    name: 'app.info.1',
-    url: 'info/1',
-    views: {
-      tab: {
-        template: '<label>Tab 1</label>'
       }
     }
   }
